@@ -1,0 +1,33 @@
+### Login
+POST http://localhost:8000/auth/login
+
+{
+    "username": "admin",
+    "password" : "admin123"
+}
+
+### products
+
+GET http://localhost:8000/products
+
+
+
+
+### card
+
+GET http://localhost:8000/cart
+
+
+### orders
+
+get http://localhost:8000/orders
+
+
+### health_check
+
+GET http://localhost:8000/
+
+
+
+
+

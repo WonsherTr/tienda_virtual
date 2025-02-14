@@ -1,0 +1,8 @@
+cryptography
+uvicorn
+gunicorn
+fastapi
+PyJWT
+sqlalchemy
+pymysql
+python-dotenv

@@ -1,0 +1,64 @@
+version: '3.8'
+services:
+  db:
+    image: mysql:8
+    container_name: carlos_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_DATABASE: carlos_db
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: admin
+    ports:
+      - "33061:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./auth_service/scripts/:/docker-entrypoint-initdb.d/
+
+  auth_service:
+    build: ./auth_service
+    ports:
+      - "8001:8001"
+    depends_on:
+      - db
+    environment:
+      - DATABASE_URL=mysql+pymysql://root:password@db/auth_service 
+  product_service:
+    build: ./product_service
+    ports:
+      - "8002:8002"
+    depends_on:
+      - db
+    environment:
+      - DATABASE_URL=mysql+pymysql://root:password@db/product_service
+
+  cart_service:
+    build: ./cart_service
+    ports:
+      - "8003:8003"
+    depends_on:
+      - db
+    environment:
+      - DATABASE_URL=mysql+pymysql://root:password@db/cart_service
+
+  order_service:
+    build: ./order_service
+    ports:
+      - "8004:8004"
+    depends_on:
+      - db
+    environment:
+      - DATABASE_URL=mysql+pymysql://root:password@order_db/order_service
+
+  api_gateway:
+    build: ./api_gateway
+    ports:
+      - "8000:8000"
+    depends_on:
+      - auth_service
+      - product_service
+      - cart_service
+      - order_service
+
+volumes:
+  mysql_data:  
