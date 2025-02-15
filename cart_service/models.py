@@ -32,3 +32,4 @@ class Cart(Base):
     user = relationship("User")
     product_id = Column(Integer, ForeignKey("products.id"))
     product = relationship("Product")
+    quantity = Column(Integer)

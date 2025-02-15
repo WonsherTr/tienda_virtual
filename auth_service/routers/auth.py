@@ -14,7 +14,6 @@ SECRET_KEY = os.getenv("SECRET_KEY", "default_secret_key")
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
 router = APIRouter()
-
 # Función para obtener la base de datos
 def get_db():
     db = SessionLocal()

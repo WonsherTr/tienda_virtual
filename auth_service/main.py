@@ -11,3 +11,4 @@ app.include_router(auth_router, prefix="/auth")
 @app.get("/")
 def health_check():
     return {"message": "Auth Service Running"}
+

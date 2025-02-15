@@ -24,10 +24,21 @@ class Product(Base):
     category_id = Column(Integer, ForeignKey("categories.id"))
     category = relationship("Category")
 
+
+class Cart(Base):
+    __tablename__ = "cart"
+    id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(Integer, ForeignKey("users.id"))
+    user = relationship("User")
+    product_id = Column(Integer, ForeignKey("products.id"))
+    product = relationship("Product")
+    quantity = Column(Integer)
+
 class Order(Base):
     __tablename__ = "orders"
     id = Column(Integer, primary_key=True, index=True)
     user_id = Column(Integer, ForeignKey("users.id"))
+    cart_id = Column(Integer, ForeignKey("cart.id"))
     total = Column(Float, nullable=False)
     created_at = Column(DateTime, nullable=False)
     status = Column(Enum('pending', 'completed', 'cancelled'), default='pending')

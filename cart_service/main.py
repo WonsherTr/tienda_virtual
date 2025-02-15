@@ -7,3 +7,4 @@ app.include_router(cart_service, prefix="/cart")
 @app.get("/")
 def health_check():
     return {"message": "Cart Service Running"}
+

@@ -2,18 +2,11 @@ from sqlalchemy import Column, Integer, String, ForeignKey, Float, Enum
 from sqlalchemy.orm import relationship
 from database import Base
 
-class User(Base):
-    __tablename__ = "users"
-    id = Column(Integer, primary_key=True, index=True)
-    username = Column(String(50), unique=True, nullable=False)
-    password = Column(String(255), nullable=False)
-    email = Column(String(100), unique=True, nullable=False)
-    role = Column(Enum('admin', 'customer'), default='customer')
-
 class Category(Base):
     __tablename__ = "categories"
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String(100), unique=True, nullable=False)
+    description = Column(String(255))
 
 class Product(Base):
     __tablename__ = "products"
