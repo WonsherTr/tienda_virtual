@@ -5,6 +5,7 @@ from database import SessionLocal
 from models import Order, Cart, Product
 from schemas import OrderCreate
 
+
 router = APIRouter()
 
 def get_db():
@@ -31,5 +32,6 @@ def create_order(order: OrderCreate, db: Session = Depends(get_db)):
     return db_order
 
 @router.get("/")
-def list_cart(db: Session = Depends(get_db)):
-    return db.query(Order).all()
+async def list_cart(db: Session = Depends(get_db)):
+   return db.query(Order).all()
+

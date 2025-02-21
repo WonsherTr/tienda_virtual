@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Body
+from fastapi import FastAPI, Body, Request
 import httpx
 from schemas import (
     ProductCreate,
@@ -86,3 +86,13 @@ async def create_order(order: OrderCreate = Body(...)):
             follow_redirects=True
         )
     return response.json()
+
+##--------------------------------auth services---------------------------------#
+
+@app.post("/auth/login")
+async def login(request: Request):
+    async with httpx.AsyncClient() as client:
+        response = await client.post("http://auth_service:8001/login", json=await request.json())
+        return response.json()
+
+

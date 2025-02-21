@@ -12,3 +12,6 @@ app.include_router(categories_router, prefix="/categories", tags=["Categories"])
 @app.get("/")
 def health_check():
     return {"message": "Product Service Running"}
+
+
+
